@@ -1,0 +1,32 @@
+{
+  "name": "jsamazona",
+  "version": "1.0.0",
+  "description": "1. 폴더 구조     1. jsamazona root 폴더 생성     2. frontend & backend 폴더 생성 (프론트 백 구분)     3. frontend 폴더에 src 폴더 생성     4. src폴더에 index.html, style.css 생성 (html, css, js 파일 생성)     5. frontend 폴더 npm init     6. npm install -D live-server (서버라이브러리 사용 )     7. package.json scripts 추가 (\"start\": \"live-server src --verbose\")",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch backend --exec babel-node backend/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.13"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "eslint": "^7.18.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^7.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
