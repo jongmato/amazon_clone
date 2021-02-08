@@ -45,4 +45,29 @@ userRouter.post(
         }
     }),
 );
+
+userRouter.post(
+    '/register',
+    expressAsyncHandler(async (req, res) => {
+        const user = new User({
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+        });
+        const createdUser = await user.save();
+        if (!createdUser) {
+            res.status(401).send({
+                message: 'Invalid User Data',
+            });
+        } else {
+            res.send({
+                _id: signinUser._id,
+                name: signinUser.name,
+                email: signinUser.email,
+                isAdmin: signinUser.isAdmin,
+                token: generateToken(signinUser),
+            });
+        }
+    }),
+);
 export default userRouter;
