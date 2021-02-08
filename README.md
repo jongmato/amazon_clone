@@ -1,16 +1,18 @@
 # JS AMAZONA CLONE PROJECT
 
+## Vanilla JS & MongoDB & express를 이용한 ECommerce Site (아마존)
+
 1. 폴더 구조
     1. jsamazona root 폴더 생성
     2. frontend & backend 폴더 생성 (프론트 백 구분)
     3. frontend 폴더에 src 폴더 생성
-    4. src폴더 > js 파일 
+    4. src폴더 > 프론트단 구성 파일 
     5. frontend 폴더 > screen폴더 > view 파일
     6. frontend 폴더 > images폴더 > 프로젝트에서 사용하는 이미지 
     7. frontend 폴더 -> axios(HTTP 비동기 통신 라이브러리)사용
     8. frontend 폴더 -> package.json ->webpack 사용
         - app.js -> index.js로 이름 변경 (webpack에서 index.js를 main.js로 변환)
-    9. utils.js -> export parseRequestURL()
+    9. utils.js ->  parseRequestURL(), Indicator(로딩바) 구성
     10. index.js -> router, routes 
     11. root jsamazona folder > backend 폴더 생성
     12. root jsamazona folder -> package.json -> express, babel, nodemon 사용
