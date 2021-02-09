@@ -61,11 +61,11 @@ userRouter.post(
             });
         } else {
             res.send({
-                _id: signinUser._id,
-                name: signinUser.name,
-                email: signinUser.email,
-                isAdmin: signinUser.isAdmin,
-                token: generateToken(signinUser),
+                _id: createdUser._id,
+                name: createdUser.name,
+                email: createdUser.email,
+                isAdmin: createdUser.isAdmin,
+                token: generateToken(createdUser),
             });
         }
     }),
@@ -85,7 +85,7 @@ userRouter.put(
             user.name = req.body.name || user.name;
             user.email = req.body.email || user.email;
             user.password = req.body.password || user.password;
-            const updateUser = await user.save();
+            const updatedUser = await user.save();
             res.send({
                 _id: updatedUser._id,
                 name: updatedUser.name,
