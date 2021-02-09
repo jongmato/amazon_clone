@@ -1,5 +1,5 @@
 import CheckoutSteps from '../components/CheckoutSteps';
-import { setShipping } from '../localStorage';
+import { getShipping, getUserInfo, setShipping } from '../localStorage';
 
 const ShippingScreen = {
     after_render: () => {
