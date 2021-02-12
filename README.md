@@ -1,8 +1,27 @@
 # JS AMAZONA CLONE PROJECT
 
-## Vanilla JS & MongoDB & express를 이용한 ECommerce Site (아마존)
+# 설명 
+---
 
-1. 폴더 구조
+## Vanilla JS & MongoDB & express를 이용한 ECommerce Site 프로젝트 (아마존 참고)
+
+# 프로젝트 구조 
+---
+
+# 스크린샷
+---
+
+
+
+
+
+
+
+
+# 공부한 내용 정리
+--- 
+
+1. record
     1. jsamazona root 폴더 생성
     2. frontend & backend 폴더 생성 (프론트 백 구분)
     3. frontend 폴더에 src 폴더 생성
@@ -27,3 +46,17 @@
         - body-parser : API 요청(POST, PUT)에서 받은 body(req.body) 값을 파싱하는 역할을 수행하는 미들웨어
         - express-async-handler : express router에서 async 함수를 호출할 때 오류가 발생함 -> router에서 async/await 사용하기위한 wrapper 라이브러리
         - jsonwebtoken : 정보를 JSON객체 형태로 주고 받기 위한 표준규약에 따라 생성한 암호화된 문자열(토큰) 회원인증에서 사용
+    17. localStorage.js
+        - 브라우저 localStorage에 카트에 담을 정보 set & get 기능, 사용자 정보 set & get 삭제 기능 작성 
+        - 배송정보(Shipping), 구매정보(Payment) 추가
+    18. Token 인증 타입 Bearer 사용
+        - access token 서버에 제출해서 인증을 해야한다 -> 이때 인증 방법이 Bearer Authentication이다.
+        - Bearer - JWT 혹은 OAuth에 대한 토큰을 사용한다.(토큰요청헤더 Authorization필드의 타입)
+        - 사용시 header과 아닌 headers를 사용해야 오류가 안 난다.
+    19. Checkout-wizard -> 결제 기능 구현
+        - 1단계 : (signin)로그인 완료 
+        - 2단계 : (shipping) 배송정보 입력
+        - 3단계 : (payment) 결제 paypal
+        - 4단계 : (place order) 주문화면
+        - Checkoutsteps component 생성
+        - redirectUser() -> cart에 상품이 있을경우 shipping화면으로 , 상품이 없을 경우 메인화면으로 이동
