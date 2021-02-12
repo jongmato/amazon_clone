@@ -11,7 +11,7 @@ const PaymentScreen = {
                     'input[name="payment-method"]:checked',
                 ).value;
                 setPayment({ paymentMethod });
-                document.location.hash = 'placeorder';
+                document.location.hash = '/placeorder';
             });
     },
     render: () => {
