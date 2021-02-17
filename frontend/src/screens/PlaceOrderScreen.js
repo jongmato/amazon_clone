@@ -1,5 +1,12 @@
+import { createOrder } from '../api';
 import CheckoutSteps from '../components/CheckoutSteps';
-import { getCartItems, getPayment, getShipping } from '../localStorage';
+import {
+    cleanCart,
+    getCartItems,
+    getPayment,
+    getShipping,
+} from '../localStorage';
+import { hideLoading, showLoading, showMessage } from '../utils';
 
 const convertCartToOrder = () => {
     const orderItems = getCartItems();
@@ -30,7 +37,22 @@ const convertCartToOrder = () => {
 };
 
 const PlaceOrderScreen = {
-    after_render: () => {},
+    after_render: async () => {
+        document
+            .getElementById('placeorder-button')
+            .addEventListener('click', async () => {
+                const order = convertCartToOrder();
+                showLoading();
+                const data = await createOrder(order);
+                hideLoading();
+                if (data.error) {
+                    showMessage(data.error);
+                } else {
+                    cleanCart();
+                    document.location.hash = `/order/${data.order._id}`;
+                }
+            });
+    },
     render: () => {
         const {
             orderItems,
@@ -54,7 +76,9 @@ const PlaceOrderScreen = {
                 <div>
                     <h2>Shipping</h2>
                     <div>
-                    ${shipping.address}, ${shipping.city}, ${shipping.postalCode}, 
+                    ${shipping.address}, ${shipping.city}, ${
+            shipping.postalCode
+        }, 
                     ${shipping.country}
                     </div>
                 </div>
@@ -101,7 +125,7 @@ const PlaceOrderScreen = {
                         <li><div>Tax</div><div>$${taxPrice}</div></li>
                         <li class="total"><div>Order Total</div><div>$${totalPrice}</div></li> 
                         <li>
-                        <button class="primary fw">
+                        <button id="placeorder-button" class="primary fw">
                         Place Order
                         </button>
                 </div>

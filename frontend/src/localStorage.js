@@ -48,7 +48,7 @@ export const getShipping = () => {
                 city: '',
                 postalCode: '',
                 country: '',
-            };
+        };
     return shipping;
 };
 
@@ -73,4 +73,8 @@ export const getPayment = () => {
 
 export const setPayment = ({ paymentMethod = 'paypal' }) => {
     localStorage.setItem('payment', JSON.stringify({ paymentMethod }));
+};
+
+export const cleanCart = () => {
+    localStorage.removeItem('cartItems');
 };
