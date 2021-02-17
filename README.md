@@ -1,15 +1,13 @@
 # JS AMAZONA CLONE PROJECT
 
 # 설명 
----
 
 ## Vanilla JS & MongoDB & express를 이용한 ECommerce Site 프로젝트 (아마존 참고)
 
 # 프로젝트 구조 
----
+
 
 # 스크린샷
----
 
 
 
@@ -18,8 +16,8 @@
 
 
 
-# 공부한 내용 정리
---- 
+
+# history
 
 1. record
     1. jsamazona root 폴더 생성
@@ -60,3 +58,17 @@
         - 4단계 : (place order) 주문화면
         - Checkoutsteps component 생성
         - redirectUser() -> cart에 상품이 있을경우 shipping화면으로 , 상품이 없을 경우 메인화면으로 이동
+    20. HTTP - respomse code
+        - 200 => "OK"
+        - 201 => "Created"
+        - backend > routers > orderRouter.js -> res.status를 201로 보냈기 때문에 
+        - frontend > src > api.js > createOrder에서 
+        ```js
+        if (response.statusText !== 'Created') {
+            throw new Error(response.data.message);
+        }
+        ```
+        statusText code를 Created로 체크한다.
+    21. data의 id 형식은 24자리의 16진수여야 합니다.
+        - MongoDB 에서는 데이터가 쌓일 경우, 그 데이터 하나하나를 document라고 하며 document는 ObjectId를 가진다.
+        - ObjectId는 16진수 24자리로 이루어져 있다.
