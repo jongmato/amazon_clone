@@ -72,3 +72,12 @@
     21. data의 id 형식은 24자리의 16진수여야 합니다.
         - MongoDB 에서는 데이터가 쌓일 경우, 그 데이터 하나하나를 document라고 하며 document는 ObjectId를 가진다.
         - ObjectId는 16진수 24자리로 이루어져 있다.
+    22. 페이팔 사용하기
+        - live(라이브 버전 - 실제 사용)
+        - sandbox(샌드박스 버전 - 테스트 용)
+        - 개발 / 연동 / 테스트 할 경우 샌드박스 계정을 생성해서 사용해야 한다.
+        - [페이팔 한국 사이트](https://www.paypal.com/kr/webapps/mpp/merchant)에서 비지니스 계정으로 회원가입 
+        -  [페이팔 개발자 사이트](https://developer.paypal.com/developer/applications/)에서 로그인
+        - sandbox를 유지한 상태로 Create app 버튼 클릭 App Name 설정 (jsamazona) 샌드박스 비지니스 계정을 선택
+        - App을 생성하면 Client Id 생성됨 Client Id를 .env파일에 작성해준다.
+    23. 로그인한 유저가 admin인 경우 dashboard 화면 보여줌
