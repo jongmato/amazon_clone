@@ -1,21 +1,160 @@
 # JS AMAZONA CLONE PROJECT
 
 # 설명 
+- Vanilla JS & MongoDB & express를 이용한 ECommerce Site 프로젝트 (아마존 clone)
 
-## Vanilla JS & MongoDB & express를 이용한 ECommerce Site 프로젝트 (아마존 참고)
-
-# 프로젝트 구조 
+# 실행
+1. MongoDB 다운로드 & 실행  
+- [mongoDB](https://www.mongodb.com/try/download/community)에서 다운로드
+2. .env 파일 생성
+- 프로젝트 최상단에 .env파일 생성
+```js
+//.env file
+MONGODB_URL=mongodb://localhost/jsamazona
+JWT_SECRET=somethingsecret
+PAYPAL_CLIENT_ID=db //페이팔 key입력
+```
+3. Backend
+```shell
+$ npm install
+$ npm run build
+$ npm run start
+```
+4. Frontend
+```shell
+$ cd frontend
+$ npm install
+$ npm run start
+```
+5. 관리자 계정 생성 & 로그인
+- [http://localhost:5000/api/users/createadmin](http://localhost:5000/api/users/createadmin)에 접속해서 관리자 email, password 확인 
+- [http://localhost:8080/#/signin](http://localhost:8080/#/signin)에 접속해서 미리 확인해둔 관리자 email, password 입력 후 로그인
 
 
 # 스크린샷
+![메인](./screenshot/main.png)
+
+
+# 기능 
+- 로그인 & 회원가입
+![로그인](./screenshot/login.png)
+![회원가입](./screenshot/회원가입.png)
+- 유저 프로필
+![프로필](./screenshot/주문후유저프로필화면.png)
+- 제품 상세 화면
+    - Add to Cart 버튼 클릭 -> Cart페이지에 제품이 추가된다
+    ![제품상세](./screenshot/상품상세화면.png)
+- 쇼핑카트 
+![카트](./screenshot/쇼핑카트.png)
+    - Proceed to checkout(결제진행) 버튼 클릭
+    - 배송지 정보 입력 화면
+    ![shipping](./screenshot/상품주문화면.png)
+    - 결제수단 선택
+    ![결제수단](./screenshot/결제수단선택.png)
+    - place order(주문하기)버튼 클릭
+    ![주문](./screenshot/주문.png)
+    - 페이팔 결제
+    ![페이팔](./screenshot/페이팔결제.png)
+    ![페이팔](./screenshot/페이팔결제화면.png)
+        - 개발자 계정을 사용해서 페이팔 결제를 테스트용으로 진행 
+        - [페이팔공식사이트](https://www.paypal.com/kr/webapps/mpp/home?locale.x=ko_KR?&kid=p27206541111&gclid=CjwKCAjwzMeFBhBwEiwAzwS8zChpOc_jk9XfnxhFfJ9iiye8oklqEw-00HUNGQBorEBkvfRhfdI56BoC9kUQAvD_BwE&gclsrc=aw.ds)에서 회원가입후 아래 개발자페이지로 이동 로그인한다.
+        [페이팔개발자 홈페이지](https://developer.paypal.com/classic-home)
+    ![결제완료](./screenshot/완료화면.png)
+- 관리자 계정 기능
+    ![관리자페이지](./screenshot/관리자계정메인화면.png)
+    - 상단 header부분에 Dashboard가 추가됨
+    - 대시보드 
+        - 회원수, 총 주문 량, total 결제 금액
+        - 차트
+        ![대시보드](./screenshot/대시보드.png)
+        - 제품 관리
+        ![제품 관리](./screenshot/제품관리.png)
+            - Create Product 버튼 클릭 시 제품 등록 폼 화면으로 이동
+            - Edit 버튼 클릭 시 제품 정보 수정 폼 화면으로 이동(제품 등록 폼과 일치함)
+            ![제품 수정](./screenshot/제품등록화면.png)
+            - Delete 버튼 클릭 시 경고창 표시 삭제할지 한 번더 확인
+            ![제품 삭제](./screenshot/경고창.png)
+        - 주문 내역 관리
+        ![주문내역](./screenshot/주문내역.png)
 
 
 
+# Mpdules
+- ## nodemon
+- nodemon은 `node monitor`의 약자로, 노드가 실행하는 파일이 속한 디렉터리를 감시하고 있다가 파일이 수정되면 자동으로 노드 애플리케이션을 재시작하는 확장 모듈로 개발 중인 노드 애플리케이션의 소스 코드를 수정할 때마다 매번 노드 명령어를 통해 새로 시작할 필요가 없으므로 매우 편리합니다.
+```shell
+npm i -D nodemon
+```
+- node 명령어 대신 nodemon을 사용해서 파일을 실행해 준다.
+` nodemon app.js`
 
+- ## body-parser
+- HTTPpost put 요청시 request body 에 들어오는 데이터값을 읽을 수 있는 구문으로 파싱함과 동시에 req.body 로 입력해주어 응답 과정에서 요청에 body 프로퍼티를 새로이 쓸 수 있게 해주는 미들웨어
+- express 문서에 따르면 미들웨어 없이req.body 에 접근하는 경우에는 기본으로undefined 가 설정되어 있으므로 bodyParser, multer와 같은 미들웨어를 사용하여 요청 데이터 값에 접근해야 한다는 안내를 찾을 수 있다.
 
+```shell
+npm i body-parser
+```
 
+- ## cors
+- CORS는 Cross-Origin Resource Sharing의 약자로 도메인 또는 프로토콜, 포트가 다른 서버의 자원을 요청하는 매커니즘을 말한다.
+- 하지만 동일 출처 정책(same-origin policy)때문에 `CORS` 같은 상황이 발생하면 외부 서버에 요청한 데이터를 브라우저에서 보안 목적을 차단한다. 때문에 서버나 클라이어트 단에서 특정 도메인 혹은 모든 도메인을 허용하도록 설정하여 해결해야 한다.
+- CORS문제의 해결방법 중 하나가 cors 미들웨어를 사용하는 것이다.
 
+```shell
+npm i cors
+```
+- ## dotenv
+- dotenv는 환경변수를 .env파일에 저장하고 process.env로 로드하는 의존성 모듈이다.
+- dotenv를 사용하는 이유는 우리가 개발을 하는 과정에서 `서버주소`, `고유 API KEY 값` 등 필요한 정보들을 저장을 하게 된다. 그리고 이러한 정보들은 민감한 정보임과 동시에 보안이 이루어져야 하는 정보들이다. 만약 이러한 정보들이 오픈소스(깃허브)에 공개될 경우, 해킹을 당하거나 보안적인 면에서 위험할 수 있다.
+- 이러한 문제로 dotenv패키지를 이용하여 환경변수 파일(`.env`)을 외부에 만들어 접근할 수 있게 하고, 개발 초기 단계에서 세팅하기를 권고한다.
 
+```shell
+npm i dotenv
+```
+
+- ## jsonwebtoken
+- JSON Web Token은 정보를 안전하게 전송하기 위해 정의 공개된 표준이다.
+- NodeJS에서 JWT(jsonwebtoken) 생성 및 검증을 지원하는 모듈
+- [JWT공식사이트](https://jwt.io/) - JWT를 생성하거나 검증할 수 있다.
+```shell
+npm i jsonwebtoken
+```
+
+- ## mongoose
+- Mongoose는 Node.js와 MongoDB를 위한 ODM(Object Data Mapping) library이다. Java 기반의 Hibernate. iBatis 등의 ORM(Object Relational Mapping)과 유사한 개념이다.
+- ODM의 사용은 코드 구성이나 개발 편의성 측면에서 장점이 많다. 호환성이 없는 프로그래밍언어(JavaScript) Object와 MongoDB의 데이터를 Mapping하여 간편한 CRUD를 가능하게 한다.
+- 필요에 따라 확장 및 변경이 가능한 자체 검증(Validation)과 타입 변환(Casting)이 가능하며 Express와 함께 사용하면 MVC Concept 구현이 용이하다.
+
+[사이트](https://poiemaweb.com/mongoose)참고
+
+```shell
+npm i mongoose
+```
+
+- ## axios
+- Axios는 브라우저, Node.js를 위한 Promise API를 활용하는 HTTP 비동기 통신 라이브러리입니다.
+- api 호출을 위해서 가장 많이 사용하는 라이브러리 중 하나이다.
+- [홈페이지](https://xn--xy1bk56a.run/axios/guide/)를 참고해주세요
+
+```shell
+npm i axios
+```
+
+- ## Multer
+- Multer는 파일 업로드를 위해 사용되는 `multipart/form-data` 를 다루기 위한 node.js 의 미들웨어 입니다. 효율성을 최대화 하기 위해 busboy 를 기반으로 하고 있습니다.
+- [Multer-github](https://github.com/expressjs/multer/blob/master/doc/README-ko.md)
+```shell
+npm i multer
+```
+
+- ## chartist
+- Chart Javascript 라이브러리 중의 하나로 SVG를 사용하며, CSS를 통해 모양을 다듬을 수 있습니다.
+- [ChartList](http://gionkunz.github.io/chartist-js/)
+```shell
+cd frontend
+npm i chartist
+```
 
 # history
 
