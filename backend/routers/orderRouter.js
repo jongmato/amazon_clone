@@ -51,7 +51,15 @@ orderRouter.get(
                 },
             },
         ]);
-        res.send({ users, orders, dailyOrders, productCategories });
+        res.send({
+            users,
+            orders:
+                orders.length === 0
+                    ? [{ numOrders: 0, totalSales: 0 }]
+                    : orders,
+            dailyOrders,
+            productCategories,
+        });
     }),
 );
 
@@ -139,6 +147,22 @@ orderRouter.put(
             };
             const updateOrder = await order.save();
             res.send({ message: 'Order Paid', order: updateOrder });
+        } else {
+            res.status(404).send({ message: 'Order Not Found.' });
+        }
+    }),
+);
+
+orderRouter.put(
+    '/:id/deliver',
+    isAuth,
+    expressAsyncHandler(async (req, res) => {
+        const order = await Order.findById(req.params.id);
+        if (order) {
+            order.isDelivered = true;
+            order.deliveredAt = Date.now();
+            const updatedOrder = await order.save();
+            res.send({ message: 'Order Delivered', order: updatedOrder });
         } else {
             res.status(404).send({ message: 'Order Not Found.' });
         }
